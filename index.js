@@ -21,7 +21,6 @@ app.get("/getBalance", async (req, res) => {
   const address = req.query.address;
   try {
     const bal = await getBalance(address);
-    console.log(bal, "b");
     res.json({ balance: bal });
   } catch (err) {
     console.log(err);

@@ -3,26 +3,21 @@ const axios = require("axios");
 const { PrivateKey } = require("bitcore-lib");
 const { mainnet, testnet, add } = require("bitcore-lib/lib/networks");
 const getAddressFromPrivateKey = (key) => {
-  console.log("decoding", key);
   var address = new bitcore.PrivateKey(key).toAddress(testnet);
   const addr = address.toString();
   return addr;
 };
 const isValidPrivateKey = (key) => {
-  console.log(PrivateKey.isValid(key));
   if (PrivateKey.isValid(key)) {
-    console.log("valid:-", key);
     return true;
   } else return false;
 };
 
 const getBalance = async (address) => {
   try {
-    console.log(address);
     const response = await axios.get(
       `https://api.blockcypher.com/v1/btc/test3/addrs/${address}/balance?token=a8fb0dbfc6094d44b2bdc0cd723c13a9`
     );
-    console.log(response.data.balance, "dd");
     return response.data.balance;
   } catch (error) {
     console.error("Error fetching balance:", error.message);
